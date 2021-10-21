@@ -1,0 +1,29 @@
+serviceName: "Scheduler"
+webappDirectory: "webapp"
+gatewayUrl: "http://ServiceStore:8080"
+annotationClass: "org.appops.job.core.Scheduler"
+executionMode: "SERVICE"
+webConfig:
+  ip: "http://Scheduler"
+  port: "8080"
+  contextPath: ""
+containerConfig:
+  dockerFileOrBaseDirectory: "Dockerfile"
+jettyConfig:
+  driver: "com.mysql.jdbc.jdbc2.optional.MysqlDataSource"
+  url: "jdbc:mysql://brdatabase:3306/sessions"
+  user: "root"
+  password: "mysql#htznr"
+serviceConfig:
+    org.appops.logging.logger.config.LoggerConfig:
+      destinationLogger: JUL
+      aggregateLogs: false
+      level: ALL
+      handlers:
+        - enable: true
+          name: CONSOLE
+          logLevel: INFO
+        - enable: false
+          name: FILE
+          logLevel: ALL
+          pattern: '[%-5d] %-5p  - %m%n'

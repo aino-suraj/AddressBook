@@ -1,0 +1,2 @@
+modules:
+      - "org.appops.cache.slim.CacheSlimModule"

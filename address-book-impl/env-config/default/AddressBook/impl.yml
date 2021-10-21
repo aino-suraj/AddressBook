@@ -1,0 +1,8 @@
+annotationClass: org.test.addressbook.core.AddressBook
+modules:
+- org.test.addressbook.injection.AddressBookModule
+config:
+    org.appops.logging.logger.config.LoggerConfig:
+      destinationLogger: JUL
+      aggregateLogs: false
+      level: ALL

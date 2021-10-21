@@ -1,0 +1,17 @@
+modules: 
+  - org.appops.scheduler.injection.SchedulerModule
+config: 
+  org.appops.logging.logger.config.LoggerConfig: 
+    aggregateLogs: false
+    destinationLogger: JUL
+    handlers: 
+      - 
+        enable: true
+        logLevel: INFO
+        name: CONSOLE
+      - 
+        enable: false
+        logLevel: ALL
+        name: FILE
+        pattern: "[%-5d] %-5p  - %m%n"
+    level: ALL

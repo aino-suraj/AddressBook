@@ -1,0 +1,3 @@
+modules:
+      - "org.appops.service.impl.guice.ServiceStoreModule"
+annotationClass: "org.appops.slim.base.core.ServiceStore"

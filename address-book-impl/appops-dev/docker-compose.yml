@@ -1,0 +1,97 @@
+version : "3.7"
+services:
+
+    service_store:
+        build : ServiceStore
+        container_name : ServiceStore
+        restart : always
+        init: true
+        volumes:
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
+            - "/dev/shm:/dev/shm"
+        depends_on:
+            - brdatabase
+
+        ports:
+              - "8080"
+
+        networks: 
+            - appops-dev    
+            
+    brdatabase:
+        build : brdatabase
+        container_name: brdatabase
+        restart : always
+        init: true
+        ports:
+              - "3306:3306"
+        environment :
+            MYSQL_ROOT_PASSWORD : mysql#htznr
+            MYSQL_PASSWORD : root
+        volumes:
+            - database-volume:/var/lib/mysql/
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
+            - "/dev/shm:/dev/shm"
+        networks: 
+            - appops-dev
+            
+            
+    cache_service:
+        build : CacheService
+        container_name : CacheService
+        restart : always
+        init: true
+        volumes:
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
+            - "/dev/shm:/dev/shm"
+        depends_on:
+            - brdatabase
+            - service_store
+
+        ports:
+              - "8080"
+          
+        networks: 
+            - appops-dev
+     
+    scheduler_service:
+        build : Scheduler
+        container_name : Scheduler
+        restart : always
+        init: true
+        volumes:
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
+            - "/dev/shm:/dev/shm"
+        depends_on:
+            - brdatabase
+            - service_store
+
+        ports:
+              - "8080"
+
+        networks: 
+            - appops-dev
+    
+    apache2:
+        build : apache2
+        container_name: apache2
+        volumes:
+              - "/etc/timezone:/etc/timezone:ro"
+              - "/etc/localtime:/etc/localtime:ro"
+              - "/dev/shm:/dev/shm"
+        ports:
+              - "8080:80"
+        restart : always       
+        networks: 
+            - appops-dev
+
+volumes:
+      database-volume:
+networks:
+    appops-dev:
+        driver: bridge
+

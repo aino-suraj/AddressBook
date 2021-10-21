@@ -1,0 +1,7 @@
+annotationClass: org.appops.cache.core.CacheService
+modules: 
+    - org.appops.cache.injection.GuavaCacheServiceModule
+configMap:
+    org.appops.cache.config.GuavaCacheConfig: 
+      expireAfterAccessInMinutes: ""
+      maximumSize: ""

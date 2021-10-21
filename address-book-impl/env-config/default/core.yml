@@ -1,0 +1,28 @@
+---
+serviceName: AddressBook
+webappDirectory: "webapp"
+gatewayUrl: "http://localhost:8080/ServiceStore"
+annotationClass: org.test.addressbook.core.AddressBook
+executionMode: "SERVICE"
+packageToScan: org.test.addressbook
+webConfig:
+  ip: "http://localhost"
+  port: 8090
+  contextPath: ""
+containerConfig:
+  dockerFileOrBaseDirectory: "Dockerfile"
+jettyConfig:
+  driver: "com.mysql.jdbc.jdbc2.optional.MysqlDataSource"
+  url: "jdbc:mysql://localhost:3306/sessions"
+  user: "root"
+  password: "mysql#htznr"
+serviceConfig:
+  org.appops.logging.logger.config.LoggerConfig:
+    destinationLogger: "LOG4J"
+    overrideLoggers: []
+    aggregateLogs: false
+    level: "ALL"
+    
+    
+    
+    

@@ -1,0 +1,3 @@
+annotationClass: org.appops.cache.core.CacheService
+modules:
+- org.appops.cache.slim.CacheSlimModule

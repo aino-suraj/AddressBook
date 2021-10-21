@@ -1,0 +1,6 @@
+annotationClass: org.appops.job.core.Scheduler
+modules: 
+    - "org.appops.scheduler.injection.SchedulerModule"
+configMap:
+    org.appops.scheduler.config.SchedulerConfig: 
+      tokenPollPeriodInSec: 5

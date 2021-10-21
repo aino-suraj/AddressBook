@@ -1,0 +1,16 @@
+modules:
+    - "org.appops.service.impl.guice.ServiceStoreModule"
+annotationClass: "org.appops.slim.base.core.ServiceStore"
+config:
+    org.appops.logging.logger.config.LoggerConfig:
+      destinationLogger: JUL
+      aggregateLogs: false
+      level: ALL
+      handlers:
+        - enable: true
+          name: CONSOLE
+          logLevel: INFO
+        - enable: false
+          name: FILE
+          logLevel: ALL
+          pattern: '[%-5d] %-5p  - %m%n'
