@@ -1,0 +1,9 @@
+/target/
+/.settings/
+/build/
+/gradle/
+/.classpath
+/.project
+/gradlew
+/gradlew.bat
+/**/*.log
