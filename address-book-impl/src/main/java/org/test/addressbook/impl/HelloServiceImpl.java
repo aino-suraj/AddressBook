@@ -6,7 +6,12 @@ public class HelloServiceImpl implements HelloService {
 
   @Override
   public String sayHello(String name) {
-    return "Hello " + name+" !";
+    return "Hello " + name + " !";
+  }
+
+  @Override
+  public String addName(String name) {
+    return "name added " + name;
   }
 
 }

@@ -1,4 +1,4 @@
-package org.test.addressbook.injection;
+package org.test.addressbook.impl;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
@@ -11,11 +11,22 @@ public class HelloServiceAsyncImpl implements HelloServiceAsync {
     CompletableFuture<String> completableFuture = new CompletableFuture<String>();
 
     Supplier<String> supplier = () -> {
-      return name;
+      return "Hello " + name + " !";
     };
 
     return completableFuture.supplyAsync(supplier);
 
+  }
+
+  @Override
+  public CompletableFuture<String> addName(String name) {
+    CompletableFuture<String> completableFuture = new CompletableFuture<String>();
+
+    Supplier<String> supplier = () -> {
+      return "name added " + name;
+    };
+
+    return completableFuture.supplyAsync(supplier);
   }
 
 }

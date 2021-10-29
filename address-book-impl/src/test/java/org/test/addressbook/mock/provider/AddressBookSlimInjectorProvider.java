@@ -25,6 +25,7 @@ import org.appops.core.ClassPathAnalyser;
 import org.appops.core.ServiceException;
 import org.appops.core.deployment.DeploymentMode;
 import org.appops.core.deployment.ServiceConfiguration;
+import org.appops.job.SchedulerSlimModule;
 import org.appops.logging.guice.DefaultLoggerModule;
 import org.appops.marshaller.DescriptorType;
 import org.appops.marshaller.Marshaller;
@@ -39,44 +40,41 @@ import org.appops.service.injection.ServiceStoreSlimModule;
 import org.appops.web.jetty.JettyWebServiceModule;
 import org.test.addressbook.injection.AddressBookSlimModule;
 
-public class AddressBookMockInjectorProvider {
+public class AddressBookSlimInjectorProvider {
 
   private static Logger logger =
-      Logger.getLogger(AddressBookMockInjectorProvider.class.getSimpleName());
+      Logger.getLogger(AddressBookSlimInjectorProvider.class.getSimpleName());
   private static Injector injector;
   private String configDirPath;
 
-  public AddressBookMockInjectorProvider() throws ServiceException {
+  public AddressBookSlimInjectorProvider() throws ServiceException {
     init();
   }
 
-  public AddressBookMockInjectorProvider(String envConfigPath) throws ServiceException {
+  public AddressBookSlimInjectorProvider(String envConfigPath) throws ServiceException {
     setConfigDirPath(envConfigPath);
     init();
   }
 
   public void init() throws ServiceException {
-    // if (configDirPath == null) {
-    // setConfigDirPath("");
-    // }
     String args[] = {};
-
     ServiceArgs appArgs = new ServiceArgs(args);
     startApp(appArgs);
-
   }
 
   protected static void startApp(ServiceArgs serviceArgs) {
     try {
       List<Module> modules = new ArrayList<>();
-      modules.add(new ServiceBaseModule());
-      modules.add(new ServiceStoreSlimModule());
       modules.add(new ConfigServiceModule());
       modules.add(new MarshallerModule());
-      modules.add(new JettyWebServiceModule());
       modules.add(new DefaultLoggerModule());
+
       modules.add(new CacheSlimModule());
-      // modules.add(new AsyncAddressBookSlimModule());
+      modules.add(new ServiceStoreSlimModule());
+      modules.add(new SchedulerSlimModule());
+      modules.add(new ServiceBaseModule());
+      modules.add(new JettyWebServiceModule());
+
       modules.add(new AddressBookSlimModule());
 
       injector = Guice.createInjector(modules);
@@ -124,9 +122,6 @@ public class AddressBookMockInjectorProvider {
           }
         }
       }
-
-      // Injector appInjector = createAppInjector(injector, serviceConfigMap,
-      // serviceConfiguration.getMode(), serviceConfiguration);
 
       initializeServices(serviceConfigMap, injector, serviceConfiguration, profileName,
           profileRoot);
@@ -342,7 +337,7 @@ public class AddressBookMockInjectorProvider {
   }
 
   public static void setInjector(Injector injector) {
-    AddressBookMockInjectorProvider.injector = injector;
+    AddressBookSlimInjectorProvider.injector = injector;
   }
 
   public String getConfigDirPath() {

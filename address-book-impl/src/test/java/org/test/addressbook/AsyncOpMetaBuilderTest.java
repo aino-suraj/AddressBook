@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import java.lang.reflect.Method;
 import org.appops.core.service.meta.ServiceOpMeta;
 import org.appops.slim.base.invocation.ApiProxyInvocationHandler;
-import org.appops.slim.base.invocation.OpMetaComputer;
+import org.appops.slim.base.invocation.async.AsyncOpMetaComputer;
 import org.junit.jupiter.api.Test;
 import org.test.addressbook.service.HelloService;
 import org.test.addressbook.service.HelloServiceAsync;
@@ -29,10 +29,11 @@ class AsyncOpMetaBuilderTest {
     Method asyncMethod = asyncClazz.getDeclaredMethod("sayHello", String.class);
     Object[] asyncMethodArgs = asyncMethod.getParameters();
 
-    OpMetaComputer computeASync = new OpMetaComputer();
+    AsyncOpMetaComputer computeASync = new AsyncOpMetaComputer();
     ServiceOpMeta asyncOpMeta = computeASync.computeOpMeta(asyncMethod, asyncMethodArgs);
 
-    assertEquals(syncOpMeta, asyncOpMeta);
+    assertEquals(syncOpMeta.getName(), asyncOpMeta.getName());
+    assertEquals(syncOpMeta.getClass(), asyncOpMeta.getClass());
   }
 
 }

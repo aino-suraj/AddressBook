@@ -9,4 +9,8 @@ public interface HelloService {
 
   @ServiceOp(method = RequestMethod.GET, path = "sayHello")
   public String sayHello(String name);
+
+  @ServiceOp(method = RequestMethod.POST, path = "addName")
+  public String addName(String name);
+
 }

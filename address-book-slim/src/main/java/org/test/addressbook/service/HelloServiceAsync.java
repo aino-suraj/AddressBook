@@ -8,4 +8,6 @@ public interface HelloServiceAsync {
 
   public CompletableFuture<String> sayHello(String name);
 
+  public CompletableFuture<String> addName(String name);
+
 }
