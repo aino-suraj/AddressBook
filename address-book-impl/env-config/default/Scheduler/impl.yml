@@ -1,0 +1,8 @@
+modules: 
+  - org.appops.scheduler.injection.SchedulerModule
+annotationClass: org.appops.job.core.Scheduler
+config: 
+  org.appops.logging.logger.config.LoggerConfig: 
+    aggregateLogs: false
+    destinationLogger: JUL
+    level: ALL

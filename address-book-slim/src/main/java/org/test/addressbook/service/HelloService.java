@@ -7,7 +7,7 @@ import org.test.addressbook.core.AddressBook;
 @AddressBook
 public interface HelloService {
 
-  @ServiceOp(method = RequestMethod.GET, path = "sayHello")
+  @ServiceOp(method = RequestMethod.POST, path = "sayHello")
   public String sayHello(String name);
 
   @ServiceOp(method = RequestMethod.POST, path = "addName")

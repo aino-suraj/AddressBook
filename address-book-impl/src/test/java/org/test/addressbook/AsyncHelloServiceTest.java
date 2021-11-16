@@ -27,7 +27,7 @@ public class AsyncHelloServiceTest {
   void testAsyncInvocation() throws InterruptedException, ExecutionException {
     HelloServiceAsync helloServiceAsync = injector.getInstance(HelloServiceAsync.class);
     CompletableFuture<String> result =
-        helloServiceAsync.addName("Prashant").thenApply(new Function<String, String>() {
+        helloServiceAsync.addName("Prashant").thenApplyAsync(new Function<String, String>() {
 
           @Override
           public String apply(String t) {
@@ -40,7 +40,7 @@ public class AsyncHelloServiceTest {
         });
 
     Thread.sleep(5000);
-    System.out.println("sayHello() method invoked....");
+    System.out.println("sayHello() method invoked...." + result);
 
   }
 
