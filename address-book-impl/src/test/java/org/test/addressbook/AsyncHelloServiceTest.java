@@ -1,5 +1,6 @@
 package org.test.addressbook;
 
+import static org.junit.Assert.assertEquals;
 import com.google.inject.Injector;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -31,15 +32,14 @@ public class AsyncHelloServiceTest {
 
           @Override
           public String apply(String t) {
-            String res = "hi Suraj " + t;
-            System.out.println(res);
-            System.out.println("**********************");
-            return res;
+            String result = "hi Suraj " + t;
+            System.out.println(result);
+            assertEquals("hi Suraj Prashant", result);
+            return result;
           }
-
         });
 
-    Thread.sleep(5000);
+    Thread.sleep(50000);
     System.out.println("sayHello() method invoked...." + result);
 
   }
