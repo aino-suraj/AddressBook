@@ -1,7 +1,7 @@
 ---
 serviceName: AddressBook
 webappDirectory: "webapp"
-gatewayUrl: "http://localhost:8080/ServiceStore"
+gatewayUrl: "http://localhost:8080/"
 annotationClass: org.test.addressbook.core.AddressBook
 executionMode: "SERVICE"
 packageToScan: org.test.addressbook
